@@ -166,7 +166,11 @@ const ProjectsSection = () => {
                 transition={{ duration: 0.5, delay: 0.2 + idx * 0.15 }}
                 className={project.featured ? "md:col-span-2" : ""}
               >
-                <TiltCard className="h-full relative glass-heavy rounded-xl p-6 flex flex-col justify-between group cursor-default overflow-hidden">
+                <TiltCard className="h-full relative glass-heavy rounded-xl p-6 flex flex-col justify-between group cursor-pointer overflow-hidden">
+                  {/* Click overlay */}
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-30" />
+                  )}
                   {/* Top gradient line */}
                   <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -188,18 +192,8 @@ const ProjectsSection = () => {
                             {project.status}
                           </span>
                         )}
-                        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-                          {project.githubUrl ? (
-                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                              <Github className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-                              <ArrowUpRight className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-                            </a>
-                          ) : (
-                            <>
-                              <Github className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-                              <ArrowUpRight className="w-4 h-4 text-muted-foreground hover:text-foreground cursor-pointer transition-colors" />
-                            </>
-                          )}
+                        <div className="flex opacity-0 group-hover:opacity-100 transition-opacity shrink-0 relative z-40">
+                          <Github className="w-4 h-4 text-muted-foreground transition-colors group-hover:text-foreground" />
                         </div>
                       </div>
                     </div>
